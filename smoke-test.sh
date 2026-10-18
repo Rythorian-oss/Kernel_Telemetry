@@ -8,7 +8,7 @@
 
 set -euo pipefail
 
-# ── Paths under /tmp so we do not pollute /var ──────────────────────────
+# Paths under /tmp so we do not pollute /var
 export KERNEL_TELEMETRY_SOCKET="/tmp/kernel-telemetry-smoke.sock"
 export KERNEL_TELEMETRY_PID="/tmp/kernel-telemetry-smoke.pid"
 export KERNEL_TELEMETRY_DATA="/tmp/kernel-telemetry-smoke-data"
@@ -65,7 +65,7 @@ echo "==> Stopping engine (SIGTERM)"
 kill -TERM "$ENGINE_PID" 2>/dev/null || true
 wait "$ENGINE_PID" 2>/dev/null || true
 
-# ── Verification ────────────────────────────────────────────────────────
+# Verification
 COUNT=$(find "$KERNEL_TELEMETRY_DATA" -name '*.parquet' | wc -l)
 if [ "$COUNT" -eq 0 ]; then
     echo
@@ -80,7 +80,7 @@ fi
 echo
 echo "PASS: $COUNT parquet file(s) written."
 
-# ── Optional: DuckDB query ──────────────────────────────────────────────
+# Optional: DuckDB query 
 if command -v duckdb >/dev/null 2>&1; then
     echo
     echo "==> Querying top 10 executables"
