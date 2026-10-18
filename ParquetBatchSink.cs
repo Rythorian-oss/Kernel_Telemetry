@@ -25,9 +25,8 @@ public sealed class ParquetBatchSink : IBatchSink
         _log = log.ForContext<ParquetBatchSink>();
         Directory.CreateDirectory(_opts.DataDirectory);
 
-        // DateTime column is for human consumption only. The authoritative
-        // timestamp is TimestampNs (ulong), preserved with full nanosecond
-        // resolution. Parquet.Net maps DateTime to TIMESTAMP_MICROS.
+        // The authoritative timestamp is TimestampNs (ulong), preserved with full nanosecond resolution. 
+        // Parquet.Net maps DateTime to TIMESTAMP_MICROS.
         _schema = new ParquetSchema(
             new DateTimeDataField("TimestampUtc", DateTimeFormat.DateAndTimeMicros),
             new DataField<ulong>("TimestampNs"),
