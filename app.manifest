@@ -27,7 +27,7 @@
         <!--
           asInvoker: the engine runs with the privileges of the invoking
           user. Root (or CAP_BPF + CAP_PERFMON) is required for the
-          *collector*, not the engine. See README.md § Running.
+          *collector*, not the engine.
         -->
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
       </requestedPrivileges>
