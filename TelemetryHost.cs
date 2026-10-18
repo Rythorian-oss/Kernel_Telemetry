@@ -52,13 +52,10 @@ public sealed class TelemetryHost : IAsyncDisposable
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            throw; // Main owns logging.
+            throw; 
         }
     }
 
-    // CA1822: genuinely stateless — made static.
-    // CA1859: IEventSource is a deliberate seam. Narrowing to UnixSocketEventSource
-    //         would make the producer untestable and prevent a future file-replay source.
     [SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance",
         Justification = "IEventSource is a deliberate seam for testability (FakeEventSource) and future source implementations (file replay). Narrowing would remove the seam.")]
     private static async Task PumpAsync(
