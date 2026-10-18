@@ -25,7 +25,7 @@ public sealed class SocketPathGuard : IDisposable
                 throw new InvalidOperationException(
                     $"Telemetry socket '{socketPath}' is actively owned by process {pid}.");
             }
-            TryUnlink(pidPath); // stale PID file from a crashed previous instance
+            TryUnlink(pidPath); 
         }
 
         if (File.Exists(socketPath))
