@@ -15,9 +15,6 @@ namespace KernelTelemetry.Engine;
 
 public static class Program
 {
-    // No `args` parameter: the engine is configured entirely through
-    // environment variables (see TelemetryOptions). Add `string[] args`
-    // back when CLI overrides are actually implemented — not before.
     public static async Task<int> Main()
     {
         // Platform and wire-contract verification must run "BEFORE" any
