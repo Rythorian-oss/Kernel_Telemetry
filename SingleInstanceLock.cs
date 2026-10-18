@@ -20,7 +20,7 @@ public sealed class SingleInstanceLock : IDisposable
         }
         catch (AbandonedMutexException)
         {
-            _owns = true; // previous owner crashed; lock is ours
+            _owns = true;
         }
 
         if (!_owns)
