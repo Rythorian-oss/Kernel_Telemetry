@@ -1,0 +1,38 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{faE04ec0-301f-11d3-bf4b-00c04f79efbc}") = "KernelTelemetry.Engine", "src\KernelTelemetry.Engine\KernelTelemetry.Engine.csproj", "{7c4a7f1e-2d8b-4c9f-9a5e-3b2d1f8c4a6e}"
+EndProject
+Project("{2150e333-8fdc-42a3-9474-1a3956d46de8}") = "tools", "tools", "{8d5b8f2f-3e9c-5daf-ab6f-4c3e2a9d5b7f}"
+	ProjectSection(SolutionItems) = preProject
+		tools\collector.py = tools\collector.py
+		tools\smoke-test.sh = tools\smoke-test.sh
+	EndProjectSection
+EndProject
+Project("{2150e333-8fdc-42a3-9474-1a3956d46de8}") = "Solution Items", "Solution Items", "{9e6c9a3a-4f0d-6eb0-bc7a-5d4f3b0e6c8a}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7c4a7f1e-2d8b-4c9f-9a5e-3b2d1f8c4a6e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7c4a7f1e-2d8b-4c9f-9a5e-3b2d1f8c4a6e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7c4a7f1e-2d8b-4c9f-9a5e-3b2d1f8c4a6e}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7c4a7f1e-2d8b-4c9f-9a5e-3b2d1f8c4a6e}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {b7e3b8a6-7c1d-4f2e-b9a3-4d5e6f7a8b9c}
+	EndGlobalSection
+EndGlobal

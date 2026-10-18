@@ -1,0 +1,66 @@
+﻿NuGet configuration has no nuget.org source enabled. The HOSTING error message lists the only sources NuGet actually searched
+— two local/offline paths — and the OpenTelemetry packages don't exist there, so NU1101 is the expected outcome.
+
+Here are the fix steps.
+
+1. Confirm the current source list
+In PowerShell:
+
+Run powershell:
+dotnet nuget list source
+You will most likely see output like this, with no nuget.org entry, or with nuget.org disabled:
+
+text readout:
+Registered Sources:
+  1.  Microsoft Visual Studio Offline Packages [Enabled]
+      C:\Program Files\dotnet\library-packs
+  2.  ...
+2. Add the nuget.org source
+Run:
+
+Run powershell:
+dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+This is the officially recommended fix.
+
+Run dotnet nuget list source again and confirm that nuget.org now appears in the list and is enabled.
+
+3. Restore again
+Run powershell:
+cd C:\Users\Drukaz\Desktop\KernelTelemetry
+dotnet restore
+With a working network connection, OpenTelemetry.Exporter.Console and OpenTelemetry.Extensions.Hosting should now download 
+successfully.
+
+4. If you are using Visual Studio
+You can also add the source through the GUI:
+
+Tools → NuGet Package Manager → Package Manager Settings
+
+Select Package Sources on the left
+
+Click the + button in the upper right; set Name to nuget.org and Source to https://api.nuget.org/v3/index.json
+
+Click OK, then rebuild the solution
+
+If it still fails after adding the source
+Troubleshoot in this order:
+
+Network / proxy: confirm that https://api.nuget.org/v3/index.json is reachable. Corporate networks may block that address or 
+require a proxy.
+
+Package Source Mapping: if your organization's policy enables source mapping, ensure OpenTelemetry.* is mapped to nuget.org. 
+Check the <packageSourceMapping> section in nuget.config.
+
+Clear cache and retry:
+
+powershell
+dotnet nuget locals all --clear
+dotnet restore
+Version availability: confirm that the version in Directory.Packages.props (1.9.0) actually exists on nuget.org. 
+OpenTelemetry.Exporter.Console and OpenTelemetry.Extensions.Hosting are both official packages, so 1.9.0 should be available.
+
+A related note
+Your project targets net8.0;net9.0 and you are on a Windows path. Although the code itself is Linux-only 
+(eBPF, UnixDomainSocket, SupportedOSPlatform("linux")), doing dotnet build / dotnet restore on Windows is fine — 
+restore and compilation do not require a Linux runtime. Only runtime execution will exit due to the platform check. 
+If your goal is simply to verify that the code compiles on Windows, the steps above are sufficient.

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Kernel Telemetry Engine — application manifest.
+
+  This engine is Linux-only. The manifest has no runtime effect on
+  Linux (PE manifests are a Windows concept), but it is embedded
+  for build consistency with enterprise toolchains that inspect PE
+  metadata for elevation policy and OS compatibility.
+
+  Behaviour on Linux is governed by:
+    - [assembly: SupportedOSPlatform("linux")]  (Program.cs)
+    - BinaryContract.VerifyPlatformOrThrow()    (Program.cs:Main, first statement)
+
+  Neither the requestedExecutionLevel nor the supportedOS list below
+  affects runtime behaviour on Linux. Do not edit to "fix" Linux
+  failures — see README.md § Troubleshooting.
+-->
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+
+  <assemblyIdentity
+      version="1.0.0.0"
+      name="KernelTelemetry.Engine.app" />
+
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          asInvoker: the engine runs with the privileges of the invoking
+          user. Root (or CAP_BPF + CAP_PERFMON) is required for the
+          *collector*, not the engine. See README.md § Running.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Windows 10 / Windows 11 -->
+      <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />
+    </application>
+  </compatibility>
+
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>
+    </windowsSettings>
+  </application>
+
+</assembly>
