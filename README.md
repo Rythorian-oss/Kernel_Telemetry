@@ -982,8 +982,9 @@ PE manifests are a Windows concept. On Linux, the embedded manifest is inert —
 
 **Author:** Justin Ross — Farmington, Maine
 **Version:** 1.0.0
+** All right reserved** Ⓒ Copyright: Justin L. Ross 10-18-2026
+**GNU GENERAL PUBLIC LICENSE**
 
-This project is provided as-is for internal infrastructure use. No warranty, express or implied.
 
 The architectural discipline applied here — phase separation of ref structs, atomic file writes, honest backpressure, deterministic resource cleanup, and single-owner exception handling — follows the principles laid out in *"The Greatest Techniques Beside the Worst: A Side-by-Side Code Comparison of C# Practice (2005–2025)"* by the same author.
 
