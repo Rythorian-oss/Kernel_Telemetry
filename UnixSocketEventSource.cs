@@ -18,11 +18,6 @@ public sealed class UnixSocketEventSource : IEventSource, IAsyncDisposable
     private readonly TelemetryOptions _opts;
     private readonly ILogger _log;
     private readonly Channel<KernelEventModel> _channel;
-    // Default-capacity List<T>: the parser in some .NET 9.x SDK builds
-    // misfires on `new List<T>(N)` in field initializers when
-    // LangVersion=latest, treating `(N)` as a preview "collection
-    // expression argument". Combined with LangVersion=12.0 in
-    // Directory.Build.props, this form is stable across every SDK.
     private readonly List<KernelEventModel> _parsedEvents = [];
     private readonly List<ulong> _dropCounts = [];
     private int _started;
@@ -129,13 +124,13 @@ public sealed class UnixSocketEventSource : IEventSource, IAsyncDisposable
                         _parsedEvents.Clear();
                         _dropCounts.Clear();
 
-                        // PHASE 1: synchronous parse. Ref structs die here.
+                        // Stage 1: synchronous parse. Ref structs die here.
                         ParseFrames(buffer, ref handshook, _parsedEvents, _dropCounts, _log,
                             out SequencePosition consumed);
 
                         pipeReader.AdvanceTo(consumed, buffer.End);
 
-                        // PHASE 2: asynchronous dispatch. No ref structs in scope.
+                        // Stage 2: asynchronous dispatch. No ref structs in scope.
                         foreach (var evt in _parsedEvents)
                         {
                             TelemetryMetrics.EventsReceived.Add(1);
